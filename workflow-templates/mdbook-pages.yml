@@ -1,0 +1,43 @@
+name: Generate MdBook for Github Pages
+
+on:
+    push:
+        branches: [ $default-branch ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Get mdbook
+              uses: extractions/setup-crate@v1
+              with:
+                    owner: rust-lang
+                    name: mdBook
+
+            - name: Build book
+              run: mdbook build
+
+            - name: Create pages artifact
+              uses: actions/upload-pages-artifact@v1.0.4
+              with:
+                path: "./book"
+                retention-days: "14"
+    
+    deploy:
+        needs: build
+
+        permissions:
+            pages: write
+            id-token: write
+
+        environment:
+            name: github-pages
+            url: ${steps.deployment.outputs.page_url}
+
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/deploy-pages@v1
+
+
