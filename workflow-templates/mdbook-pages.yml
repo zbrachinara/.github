@@ -1,4 +1,4 @@
-name: Generate MdBook for Github Pages
+name: mdBook Github Pages
 
 on:
     push:

@@ -1,0 +1,10 @@
+{
+    "name": "mdBook Github Pages",
+    "description": "Builds an mdBook repository and publishes a Github Pages artifact",
+    "categories": [
+        "Markdown"
+    ],
+    "filePatterns": [
+        "^book.toml$"
+    ]
+}
